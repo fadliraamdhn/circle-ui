@@ -1,11 +1,14 @@
 import { Input } from "@/components/ui/input"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { axiosInstance } from "@/utils.ts/axios"
 import { toast } from "sonner"
 import { useProfile } from "@/hooks/useProfile"
 
+
+
 const LoginPage = () => {
+    const navigate = useNavigate();
     const { setProfile } = useProfile()
     const [form, setForm] = useState({identity: "", password: ""})
     const [loading, setLoading] = useState(false)
@@ -27,6 +30,9 @@ const LoginPage = () => {
             localStorage.setItem('isLoggedIn', 'true');
             setForm({ identity: "", password: ""});
             toast.success(`Selamat datang kembali, ${userData.username}!`)
+            setTimeout(() => {
+                navigate("/");  // Sesuaikan path jika berbeda
+            }, 1500);
         } catch (error: any) {
             const errorMessage = error?.response?.data?.message || "Login gagal." 
             toast.error(errorMessage)
