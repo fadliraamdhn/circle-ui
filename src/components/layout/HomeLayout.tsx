@@ -2,12 +2,20 @@ import type { ReactNode } from "react"
 import { Home, UserSearch, Heart, User, LogOut } from "lucide-react"
 import ProfileCard from "../ui/ProfileCard"
 import "./homelayout.css"
+import { axiosInstance } from "@/utils.ts/axios"
 
 const HomeLayout = ({ children }: { children: ReactNode}) => {
+
+    const handleLogout = async () => {
+        await axiosInstance.post("/api/v1/auth/logout");
+        localStorage.removeItem('isLoggedIn');
+        window.location.href = '/login';
+    };
+
     return (
-        <div className="flex min-h-screen">
+        <div className="flex min-h-screen max-w-[1600px] mx-auto">
             {/* Sidebar kiri */}
-            <aside className="w-70 border-r border-gray-600 py-6 px-5 flex flex-col justify-between">
+            <aside className="w-70 sticky top-0 h-screen border-r border-gray-600 py-6 px-5 flex flex-col justify-between">
                 <div>
                     <div className="text-green-500 font-bold text-5xl mb-8">
                         Circle
@@ -34,16 +42,16 @@ const HomeLayout = ({ children }: { children: ReactNode}) => {
                 </div>
                 <div className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer">
                     <LogOut className="rotate-180"/>
-                    <p className="font-medium">Logout</p>
+                    <p className="font-medium" onClick={() => handleLogout()}>Logout</p>
                 </div>
             </aside>
 
             {/* Konten utama */}
-            <main className="flex-1 pt-9 overflow-y-auto custom-scroll h-screen">
+            <main className="flex-1 px-4 py-8">
                 {children}
             </main>
 
-            <aside className="w-100 px-4 pt-10 hidden md:block">
+            <aside className="w-100 sticky top-0 h-screen px-4 pt-10 hidden md:block">
                 <h2 className="font-semibold mb-4">My Profile</h2>
                 <ProfileCard/>
             </aside>

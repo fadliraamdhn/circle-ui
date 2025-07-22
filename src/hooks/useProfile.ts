@@ -1,8 +1,13 @@
-import { useContext, useState } from "react";
-import { ProfileContext } from "@/contexts/ProfileContext";
+import { useSelector, useDispatch } from "react-redux";
+import type { RootState } from "@/store";
+import { setProfile } from "@/store/profileSlice";
 
-export const useProfile = () => {
-    const context = useContext(ProfileContext)
-    if (!context) throw new Error("useProfile must be used within a ProfileProvider")
-    return context
+export function useProfile() {
+    const profile = useSelector((state: RootState) => state.profile.profile);
+    const dispatch = useDispatch();
+
+    return {
+        profile,
+        setProfile: (profileData: any) => dispatch(setProfile(profileData)),
+    };
 }

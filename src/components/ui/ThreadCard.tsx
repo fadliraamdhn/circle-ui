@@ -1,13 +1,6 @@
 import { Heart, MessageSquareText } from "lucide-react"
 import { useState } from "react";
-
-type ThreadCardProps = {
-    id: number;
-    fullname: string;
-    username: string;
-    content: string;
-    image?: string;
-}
+import type { ThreadCardProps } from "@/types/thread";
 
 const ThreadCard: React.FC<ThreadCardProps> = ({id, fullname, username, content, image}) => {
     const [liked, setLiked] = useState(false)
@@ -34,6 +27,9 @@ const ThreadCard: React.FC<ThreadCardProps> = ({id, fullname, username, content,
                         <p className="text-gray-400">@{username}</p>
                     </div>
                     <p>{content}</p>
+                    {image && (
+                        <img src={`http://localhost:3000/uploads/${image}`} alt={image} className="w-100" />
+                    )}
                     <div className="flex gap-6 mt-4">
                         <div className="flex gap-3">
                             <Heart onClick={handleLike} fill={liked ? "red" : "none"} className="cursor-pointer"/>

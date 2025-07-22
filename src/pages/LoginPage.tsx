@@ -3,13 +3,11 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { axiosInstance } from "@/utils.ts/axios"
 import { toast } from "sonner"
-import { useProfile } from "@/hooks/useProfile"
 
 
 
 const LoginPage = () => {
     const navigate = useNavigate();
-    const { setProfile } = useProfile()
     const [form, setForm] = useState({identity: "", password: ""})
     const [loading, setLoading] = useState(false)
 
@@ -26,7 +24,6 @@ const LoginPage = () => {
             const res = await axiosInstance.post("api/v1/auth/login", form)
             const userData = res.data.data
 
-            setProfile(userData);
             localStorage.setItem('isLoggedIn', 'true');
             setForm({ identity: "", password: ""});
             toast.success(`Selamat datang kembali, ${userData.username}!`)
