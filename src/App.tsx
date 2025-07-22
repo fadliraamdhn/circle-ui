@@ -3,20 +3,21 @@ import RegisterPage from "./pages/RegisterPage"
 import LoginPage from "./pages/LoginPage"
 import HomePage from "./pages/HomePage"
 import { Toaster } from "sonner"
-import { ProfileProvider } from "./contexts/ProfileProvider"
+import { Provider } from "react-redux";
+import { store } from "@/store";
 
 function App() {
 
   return (
     <>
       <Toaster richColors position="top-center" />
-      <ProfileProvider>
+      <Provider store={store}>
       <Routes>
         <Route path="/register" element={<RegisterPage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/" element={<HomePage/>}/>
       </Routes>
-      </ProfileProvider>
+      </Provider>
     </>
     
   )
