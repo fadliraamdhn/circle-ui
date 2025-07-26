@@ -1,24 +1,23 @@
-import { useEffect, useState, type RefObject } from "react";
+import { useEffect, useRef, useState } from "react";
 import ThreadCard from "./ThreadCard";
-import { axiosInstance } from "@/utils.ts/axios";
+import { axiosInstance } from "@/utils/axios";
 import type { Thread } from "@/types/thread";
 import { useSocket } from "@/hooks/useSocket";
 
-
 const ThreadList = () => {
     const [threads, setThreads] = useState<Thread[]>([]);
-    const [page, setPage] = useState(1);
     const [loading, setLoading] = useState(false);
     const [hasMore, setHasMore] = useState(true);
+    const pageRef = useRef(1)
 
     const fetchThreads = async () => {
         if (loading) return;
         setLoading(true);
 
         try {
-            const res = await axiosInstance.get(`/api/v1/thread?page=${page}&limit=10`);
+            const res = await axiosInstance.get(`/api/v1/thread?page=${pageRef.current}&limit=10`);
             const newThreads = res.data.data;
-
+            
             if (newThreads.length === 0) {
                 setHasMore(false);
             } else {
@@ -26,7 +25,7 @@ const ThreadList = () => {
                     const uniqueNewThreads = newThreads.filter((t: Thread) => !prev.some(p => p.id === t.id));
                     return [...prev, ...uniqueNewThreads];
                 });
-                setPage(prev => prev + 1);
+                pageRef.current += 1;
             }
         } catch (error) {
             console.error("Gagal fetch thread:", error);
@@ -40,6 +39,8 @@ const ThreadList = () => {
     }, []);
 
     useEffect(() => {
+        let timeout: NodeJS.Timeout;
+
         const handleScroll = () => {
             if (loading || !hasMore) return;
 
@@ -47,12 +48,16 @@ const ThreadList = () => {
             const threshold = document.documentElement.scrollHeight - 300;
 
             if (scrollPosition >= threshold) {
-                fetchThreads();
+                clearTimeout(timeout);
+                timeout = setTimeout(() => {
+                    fetchThreads();
+                }, 200);
             }
-        }
+        };
+
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
-    }, [loading, hasMore, page])
+    }, [loading, hasMore])
 
     const handleNewThread = (thread: any) => {
         setThreads((prev) => {
@@ -62,7 +67,7 @@ const ThreadList = () => {
         });
     };
 
-    useSocket(handleNewThread);
+    useSocket("new-thread", handleNewThread);
 
     return (
         <>
@@ -74,6 +79,9 @@ const ThreadList = () => {
                     username={thread.createdByUser.username}
                     content={thread.content}
                     image={thread.image || undefined}
+                    numberLikes={thread.number_of_likes}
+                    numberReplies={thread.number_of_replies}
+                    createdAt={thread.created_at}
                 />
             ))}
 
