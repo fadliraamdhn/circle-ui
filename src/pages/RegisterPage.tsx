@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input"
-import { axiosInstance } from "@/utils.ts/axios"
+import { axiosInstance } from "@/utils/axios"
 import type React from "react"
 import { useState } from "react"
 import { Link } from "react-router-dom"

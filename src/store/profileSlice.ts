@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-import type { PayloadAction } from "@reduxjs/toolkit";
+// store/profileSlice.ts
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { Profile } from "@/types/profile";
 
 type ProfileState = {
@@ -7,7 +7,7 @@ type ProfileState = {
 };
 
 const initialState: ProfileState = {
-    profile: null
+    profile: null,
 };
 
 const profileSlice = createSlice({
@@ -15,10 +15,13 @@ const profileSlice = createSlice({
     initialState,
     reducers: {
         setProfile(state, action: PayloadAction<Profile | null>) {
-            state.profile = action.payload;
+        state.profile = action.payload;
         },
+        clearProfile(state) {
+        state.profile = null;
+        }
     },
 });
 
-export const { setProfile } = profileSlice.actions;
+export const { setProfile, clearProfile } = profileSlice.actions;
 export default profileSlice.reducer;

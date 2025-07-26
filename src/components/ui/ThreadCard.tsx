@@ -1,47 +1,82 @@
 import { Heart, MessageSquareText } from "lucide-react"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { ThreadCardProps } from "@/types/thread";
+import { Link } from "react-router-dom";
+import { shortFromNow } from "@/utils/dayjs";
+import { axiosInstance } from "@/utils/axios";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "@/store";
+import { toggleLike, updateLikeFromBackend } from "@/store/likeSlice";
 
-const ThreadCard: React.FC<ThreadCardProps> = ({id, fullname, username, content, image}) => {
-    const [liked, setLiked] = useState(false)
-    const [likes, setLikes] = useState(0)
+const ThreadCard: React.FC<ThreadCardProps> = ({ id, fullname, username, content, image, numberReplies, createdAt, numberLikes }) => {
+    const dispatch = useDispatch();
+    const likeData = useSelector((state: RootState) => state.like[id]);
+    const [likesCount, setLikesCount] = useState(numberLikes);
 
-    const handleLike = () => {
-        if (liked) {
-            setLikes(prev => prev - 1)
-        } else {
-            setLikes(prev => prev + 1)
+    const handleLike = async () => {
+        const isLiked = likeData?.liked === "YES";
+
+        setLikesCount((prev) => (isLiked ? prev - 1 : prev + 1));
+        dispatch(toggleLike(id));
+        try {
+            await axiosInstance.post(`/api/v1/like/${id}`)
+        } catch (err) {
+            console.error(err);
+            setLikesCount((prev) => (isLiked ? prev + 1 : prev - 1));
+            dispatch(toggleLike(id));
         }
-        setLiked(!liked)
-    }
+    };
+
+    useEffect(() => {
+        const fetchLike = async () => {
+        try {
+            const res = await axiosInstance.get(`/api/v1/like/${id}`)
+            if (res.data?.data?.liked) {
+                dispatch(
+                updateLikeFromBackend({ threadId: id, liked: res.data.data.liked })
+                );
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    fetchLike();
+    }, [id, dispatch]);
 
     return (
-        <>
-            <div key={id} className="flex gap-4 mt-6 py-2 px-6">  
-                <div>
-                    <img src="https://www.shutterstock.com/image-vector/man-character-face-avatar-glasses-600nw-542759665.jpg" alt="" className="w-10 h-10 rounded-full"/>
+        <div key={id} className="flex gap-4 mt-6 py-2 px-6">
+            <div>
+                <img src="https://www.shutterstock.com/image-vector/man-character-face-avatar-glasses-600nw-542759665.jpg" alt="" className="w-10 h-10 rounded-full" />
+            </div>
+            <div>
+                <div className="flex gap-2">
+                    <p className="font-medium">{fullname}</p>
+                    <p className="text-gray-400">@{username}</p>
+                    <p className="text-gray-400">• {shortFromNow(createdAt)}</p>
                 </div>
-                <div>
-                    <div className="flex gap-2">
-                        <p className="font-medium">{fullname}</p>
-                        <p className="text-gray-400">@{username}</p>
+                <p>{content}</p>
+                {image && (
+                <img src={`http://localhost:3000/uploads/${image}`} alt={image} className="w-100" />
+                )}
+                <div className="flex gap-6 mt-4">
+                    <div className="flex gap-3">
+                        <Heart
+                        onClick={handleLike}
+                        fill={likeData?.liked === "YES" ? "red" : "none"}
+                        stroke={likeData?.liked === "YES" ? "red" : "currentColor"}
+                        className="cursor-pointer"
+                        />
+                        <p>{likesCount}</p>
                     </div>
-                    <p>{content}</p>
-                    {image && (
-                        <img src={`http://localhost:3000/uploads/${image}`} alt={image} className="w-100" />
-                    )}
-                    <div className="flex gap-6 mt-4">
-                        <div className="flex gap-3">
-                            <Heart onClick={handleLike} fill={liked ? "red" : "none"} className="cursor-pointer"/>
-                            <p>{likes}</p>
-                        </div>
+                    <Link to={`/thread/${id}`} className="cursor-pointer hover:text-green-700 transition flex gap-2">
                         <MessageSquareText />
-                    </div>
+                        <p>{numberReplies}</p>
+                    </Link>
                 </div>
             </div>
-            <hr className="border-b border-gray-600"/>
-        </>
-    )
-}
+        </div>
+    );
+};
 
 export default ThreadCard

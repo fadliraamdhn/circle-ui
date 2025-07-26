@@ -1,13 +1,16 @@
 import { useEffect } from "react";
 import { io } from "socket.io-client";
 
-const socket = io("http://localhost:3000", {
-    transports: ["websocket"], 
-    withCredentials: true
+export const socket = io("http://localhost:3000", {
+    transports: ["websocket"],
+    withCredentials: true,
 });
 
-export function useSocket(onNewThread: (thread: any) => void) {
+// Hook universal: bisa untuk new-thread, new-reply, dsb
+export function useSocket(event: string, callback: (data: any) => void) {
     useEffect(() => {
+        if (!event || !callback) return;
+
         socket.on("connect", () => {
             console.log("Terhubung ke WebSocket");
         });
@@ -16,15 +19,12 @@ export function useSocket(onNewThread: (thread: any) => void) {
             console.error("WebSocket Connection Error:", err.message);
         });
 
-        socket.on("new-thread", (data) => {
-            console.log("Thread baru diterima:", data);
-            onNewThread(data);  // Callback saat ada thread baru
-        });
+        socket.on(event, callback); // ← Pakai event dinamis
 
         return () => {
             socket.off("connect");
             socket.off("connect_error");
-            socket.off("new-thread");
+            socket.off(event, callback); // ← Pastikan callback di-unsub juga
         };
-    }, []);
+    }, [event, callback]);
 }

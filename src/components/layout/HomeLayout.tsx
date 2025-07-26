@@ -2,7 +2,7 @@ import type { ReactNode } from "react"
 import { Home, UserSearch, Heart, User, LogOut } from "lucide-react"
 import ProfileCard from "../ui/ProfileCard"
 import "./homelayout.css"
-import { axiosInstance } from "@/utils.ts/axios"
+import { axiosInstance } from "@/utils/axios"
 
 const HomeLayout = ({ children }: { children: ReactNode}) => {
 
@@ -47,7 +47,7 @@ const HomeLayout = ({ children }: { children: ReactNode}) => {
             </aside>
 
             {/* Konten utama */}
-            <main className="flex-1 px-4 py-8">
+            <main className="flex-1 py-8">
                 {children}
             </main>
 

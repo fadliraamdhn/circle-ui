@@ -12,11 +12,13 @@ import { toast } from "sonner";
 import { axiosInstance } from "@/utils/axios";
 import { Image } from "lucide-react";
 
-export function CreateThreadModal() {
+export function CreateReplyModal({ threadId }: { threadId: number }) {
     const [content, setContent] = useState('');
     const [image, setImage] = useState<File | null>(null);
     const [loading, setLoading] = useState(false);
     const [open, setOpen] = useState(false)
+
+    
 
     const handleSubmit = async () => {
         if (!content) {
@@ -30,7 +32,11 @@ export function CreateThreadModal() {
         if (image) formData.append('image', image);
 
         try {
-            await axiosInstance.post('/api/v1/auth/thread', formData);
+            await axiosInstance.post(`/api/v1/reply?thread_id=${threadId}`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
             setOpen(false);
             toast.success('Thread berhasil dibuat!');
             setContent('');
@@ -52,9 +58,9 @@ export function CreateThreadModal() {
                 </button>
             </DialogTrigger>
 
-            <DialogContent>
+            <DialogContent className="overflow-y-auto">
                 <DialogHeader>
-                    <DialogTitle>Buat Thread Baru</DialogTitle>
+                    <DialogTitle>Balas Disini</DialogTitle>
                 </DialogHeader>
 
                 <Textarea
@@ -68,7 +74,7 @@ export function CreateThreadModal() {
                     <img
                         src={URL.createObjectURL(image)}
                         alt="Preview"
-                        className="h-50 rounded-lg"
+                        className="rounded-lg h-50"
                     />
                 )}
 
