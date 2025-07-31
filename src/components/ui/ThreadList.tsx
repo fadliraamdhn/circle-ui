@@ -76,6 +76,7 @@ const ThreadList = () => {
                     key={thread.id}
                     id={thread.id}
                     fullname={thread.createdByUser.full_name}
+                    photoProfile={thread.createdByUser.photo_profile}
                     username={thread.createdByUser.username}
                     content={thread.content}
                     image={thread.image || undefined}

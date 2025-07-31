@@ -4,9 +4,9 @@ export type Profile = {
     fullname: string,
     email: string,
     bio: string,
-    photoProfile: string
-    follower: number
-    following: number
+    photoProfile?: string | null
+    followers: number[]
+    following: number[]
 }
 
 export function mapToProfile(data: any): Profile {
@@ -17,7 +17,18 @@ export function mapToProfile(data: any): Profile {
         email: data.email,
         bio: data.bio,
         photoProfile: data.photo_profile,
-        follower: data.followers,
-        following: data.following
+        followers: data.followers.map((f: any) => f.followingId.id),
+        following: data.following.map((f: any) => f.followerId.id),
     };
 }
+
+
+export type Follower = {
+    id: number;
+    username: string;
+    full_name: string;
+    photo_profile: string | null;
+    bio: string;
+    isFollowed: boolean;
+    isFollowing: boolean;
+};

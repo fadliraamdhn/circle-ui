@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "@/store";
 import { toggleLike, updateLikeFromBackend } from "@/store/likeSlice";
 
-const ThreadCard: React.FC<ThreadCardProps> = ({ id, fullname, username, content, image, numberReplies, createdAt, numberLikes }) => {
+const ThreadCard: React.FC<ThreadCardProps> = ({ id, photoProfile, fullname, username, content, image, numberReplies, createdAt, numberLikes }) => {
     const dispatch = useDispatch();
     const likeData = useSelector((state: RootState) => state.like[id]);
     const [likesCount, setLikesCount] = useState(numberLikes);
@@ -16,7 +16,7 @@ const ThreadCard: React.FC<ThreadCardProps> = ({ id, fullname, username, content
     const handleLike = async () => {
         const isLiked = likeData?.liked === "YES";
 
-        setLikesCount((prev) => (isLiked ? prev - 1 : prev + 1));
+        setLikesCount((prev) => isLiked ? prev - 1 : prev + 1);
         dispatch(toggleLike(id));
         try {
             await axiosInstance.post(`/api/v1/like/${id}`)
@@ -47,7 +47,7 @@ const ThreadCard: React.FC<ThreadCardProps> = ({ id, fullname, username, content
     return (
         <div key={id} className="flex gap-4 mt-6 py-2 px-6">
             <div>
-                <img src="https://www.shutterstock.com/image-vector/man-character-face-avatar-glasses-600nw-542759665.jpg" alt="" className="w-10 h-10 rounded-full" />
+                <img src={photoProfile? `http://localhost:3000/uploads/${photoProfile}` : "default.jpg" } className="w-10 h-10 rounded-full" />
             </div>
             <div>
                 <div className="flex gap-2">
@@ -67,7 +67,7 @@ const ThreadCard: React.FC<ThreadCardProps> = ({ id, fullname, username, content
                         stroke={likeData?.liked === "YES" ? "red" : "currentColor"}
                         className="cursor-pointer"
                         />
-                        <p>{likesCount}</p>
+                        <p className="text-sm">{likeData?.liked === "YES" ? `you + ${likesCount - 1}` : `${likesCount}`}</p>
                     </div>
                     <Link to={`/thread/${id}`} className="cursor-pointer hover:text-green-700 transition flex gap-2">
                         <MessageSquareText />

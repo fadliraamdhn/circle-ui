@@ -16,10 +16,10 @@ export type Thread = {
     };
 };
 
-
 export type ThreadCardProps = {
     id: number;
     content: string;
+    photoProfile?: string| null
     fullname: string;
     username: string;
     image?: string;
@@ -42,6 +42,7 @@ export type Reply = {
         id: number;
         username: string;
         full_name: string;
+        photo_profile: string
     };
 };
 
