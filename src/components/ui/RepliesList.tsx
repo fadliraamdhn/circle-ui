@@ -42,7 +42,7 @@ const RepliesList = () => {
         (replies.map((reply) => (
             <div key={reply.id} className="flex gap-4 mt-3 py-2 px-6 border-b border-gray-600">  
                 <div>
-                    <img src="https://www.shutterstock.com/image-vector/man-character-face-avatar-glasses-600nw-542759665.jpg" alt="" className="w-10 h-10 rounded-full"/>
+                    <img src={reply.user.photo_profile ? `http://localhost:3000/uploads/${reply.user.photo_profile}` : "default.jpg" } alt="" className="w-10 h-10 rounded-full"/>
                 </div>
                     <div>
                         <div className="flex gap-2 items-center">

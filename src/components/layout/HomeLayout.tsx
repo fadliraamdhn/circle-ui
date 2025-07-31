@@ -1,8 +1,10 @@
 import type { ReactNode } from "react"
 import { Home, UserSearch, Heart, User, LogOut } from "lucide-react"
 import ProfileCard from "../ui/ProfileCard"
+import SuggestedUsers from "../ui/SuggestedUser"
 import "./homelayout.css"
 import { axiosInstance } from "@/utils/axios"
+import { Link } from "react-router-dom"
 
 const HomeLayout = ({ children }: { children: ReactNode}) => {
 
@@ -21,22 +23,30 @@ const HomeLayout = ({ children }: { children: ReactNode}) => {
                         Circle
                     </div>
                     <nav className="flex flex-col gap-3 mt-4 font-medium">
-                        <div className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer">
-                            <Home/>
-                            <a href="">Home</a>
-                        </div>
-                        <div className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer">
-                            <UserSearch/>
-                            <a href="">Search</a>
-                        </div>
-                        <div className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer">
-                            <Heart/>
-                            <a href="">Follows</a>
-                        </div>
-                        <div className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer">
-                            <User/>
-                            <a href="">Profile</a>
-                        </div>
+                        <Link to="/">
+                            <div className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer">
+                                <Home/>
+                                Home
+                            </div>
+                        </Link>
+                        <Link to="/search">
+                            <div className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer">
+                                <UserSearch/>
+                                Search
+                            </div>
+                        </Link>
+                        <Link to="/follow">
+                            <div className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer">
+                                <Heart/>
+                                Follow
+                            </div>
+                        </Link>
+                        <Link to="/me">
+                            <div className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer">
+                                <User/>
+                                Profile
+                            </div>
+                        </Link>
                         <button className="bg-green-600 cursor-pointer rounded-full px-6 py-2 font-medium">Create Post</button>
                     </nav>
                 </div>
@@ -54,6 +64,7 @@ const HomeLayout = ({ children }: { children: ReactNode}) => {
             <aside className="w-100 sticky top-0 h-screen px-4 pt-10 hidden md:block">
                 <h2 className="font-semibold mb-4">My Profile</h2>
                 <ProfileCard/>
+                <SuggestedUsers/>
             </aside>
         </div>
     )
