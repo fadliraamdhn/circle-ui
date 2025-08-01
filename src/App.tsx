@@ -10,6 +10,8 @@ import { Provider } from "react-redux";
 import { store } from "@/store";
 import UpdateProfilePage from "./pages/UpdateProfilePage"
 import FollowPage from "./pages/FollowPage"
+import { AuthProvider } from "./context/auth"
+import PrivateRoute from "./utils/privateRoute"
 
 function App() {
 
@@ -17,16 +19,20 @@ function App() {
     <>
       <Toaster richColors position="top-center" />
       <Provider store={store}>
-      <Routes>
-        <Route path="/register" element={<RegisterPage/>}/>
-        <Route path="/login" element={<LoginPage/>}/>
-        <Route path="/" element={<HomePage/>}/>
-        <Route path="/thread/:threadId" element={<ThreadPage/>}/>
-        <Route path="/profile" element={<UpdateProfilePage/>}/>
-        <Route path="/search" element={<SearchPage/>}/>
-        <Route path="/follow" element={<FollowPage/>}/>
-        <Route path="/me" element={<MyPage/>}/>
-      </Routes>
+      <AuthProvider>
+        <Routes>
+          <Route path="/register" element={<RegisterPage/>}/>
+          <Route path="/login" element={<LoginPage/>}/>
+          <Route element={<PrivateRoute/>}>
+            <Route path="/" element={<HomePage/>}/>
+            <Route path="/thread/:threadId" element={<ThreadPage/>}/>
+            <Route path="/profile" element={<UpdateProfilePage/>}/>
+            <Route path="/search" element={<SearchPage/>}/>
+            <Route path="/follow" element={<FollowPage/>}/>
+            <Route path="/me" element={<MyPage/>}/>
+          </Route>
+        </Routes>
+      </AuthProvider>
       </Provider>
     </>
     

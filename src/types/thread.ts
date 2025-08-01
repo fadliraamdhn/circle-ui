@@ -46,3 +46,9 @@ export type Reply = {
     };
 };
 
+export type AuthLogin = {
+    token: string | null;
+    login: (token: string) => void;
+    logout: () => void
+}
+

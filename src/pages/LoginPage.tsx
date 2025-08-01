@@ -21,7 +21,6 @@ const LoginPage = () => {
         try {
             const res = await axiosInstance.post("api/v1/auth/login", form)
             const userData = res.data.data
-
             localStorage.setItem('isLoggedIn', 'true');
             setForm({ identity: "", password: ""});
             toast.success(`Selamat datang kembali, ${userData.username}!`)
