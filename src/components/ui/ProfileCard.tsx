@@ -1,6 +1,7 @@
 import { useProfile } from "@/hooks/useProfile";
 import { setProfile } from "@/store/profileSlice";
 import { mapToProfile } from "@/types/profile";
+import { baseUrl } from "@/utils/apiProd";
 import { axiosInstance } from "@/utils/axios";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -36,7 +37,7 @@ const ProfileCard = () => {
             <div className="p-4 relative">
                 <div className="absolute -top-10 left-4">
                 <img
-                    src= {profile?.photoProfile? `http://localhost:3000/uploads/${profile?.photoProfile}` : "default.jpg" } 
+                    src= {profile?.photoProfile? `${baseUrl}/uploads/${profile?.photoProfile}` : "default.jpg" } 
                     alt="profile"
                     className="w-20 h-20 rounded-full border-4 border-zinc-900"
                 />

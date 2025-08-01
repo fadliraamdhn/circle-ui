@@ -7,6 +7,7 @@ import { axiosInstance } from "@/utils/axios";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "@/store";
 import { toggleLike, updateLikeFromBackend } from "@/store/likeSlice";
+import { baseUrl } from "@/utils/apiProd";
 
 const ThreadCard: React.FC<ThreadCardProps> = ({ id, photoProfile, fullname, username, content, image, numberReplies, createdAt, numberLikes }) => {
     const dispatch = useDispatch();
@@ -47,7 +48,7 @@ const ThreadCard: React.FC<ThreadCardProps> = ({ id, photoProfile, fullname, use
     return (
         <div key={id} className="flex gap-4 mt-6 py-2 px-6">
             <div>
-                <img src={photoProfile? `http://localhost:3000/uploads/${photoProfile}` : "default.jpg" } className="w-10 h-10 rounded-full" />
+                <img src={photoProfile? `${baseUrl}/uploads/${photoProfile}` : "default.jpg" } className="w-10 h-10 rounded-full" />
             </div>
             <div>
                 <div className="flex gap-2">
@@ -57,7 +58,7 @@ const ThreadCard: React.FC<ThreadCardProps> = ({ id, photoProfile, fullname, use
                 </div>
                 <p>{content}</p>
                 {image && (
-                <img src={`http://localhost:3000/uploads/${image}`} alt={image} className="w-100" />
+                <img src={`${baseUrl}/uploads/${image}`} alt={image} className="w-100" />
                 )}
                 <div className="flex gap-6 mt-4">
                     <div className="flex gap-3">

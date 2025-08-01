@@ -3,6 +3,7 @@ import { axiosInstance } from "@/utils/axios";
 import { mapToProfile, type Follower } from "@/types/profile";
 import { useDispatch } from "react-redux";
 import { setProfile } from "@/store/profileSlice";
+import { baseUrl } from "@/utils/apiProd";
 
 const FollowersList = () => {
     const [followers, setFollowers] = useState<Follower[]>([]);
@@ -58,7 +59,7 @@ const FollowersList = () => {
                     <img
                         src={
                         follower.photo_profile
-                            ? `http://localhost:3000/uploads/${follower.photo_profile}`
+                            ? `${baseUrl}/uploads/${follower.photo_profile}`
                             : "default.jpg"
                         }
                         alt={follower.username}
