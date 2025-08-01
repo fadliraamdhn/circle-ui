@@ -1,6 +1,5 @@
 import type { ThreadCardProps } from "@/types/thread"
 import { axiosInstance } from "@/utils/axios"
-import { shortFromNow } from "@/utils/dayjs"
 import { useEffect, useState } from "react"
 
 const MyThreadCard = () => {
