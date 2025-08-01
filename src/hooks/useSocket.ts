@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { io } from "socket.io-client";
 
-export const socket = io("http://https://circle-api-production.up.railway.app", {
+export const socket = io("wss://circle-api-production.up.railway.app", {
     transports: ["websocket"],
     withCredentials: true,
 });
