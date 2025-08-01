@@ -54,7 +54,7 @@ const RepliesList = () => {
                         <p>{reply.content}</p>
                         {reply.image && (
                             <img
-                                src={`http://localhost:3000/uploads/${reply.image}`}
+                                src={`${baseUrl}/uploads/${reply.image}`}
                                 alt={reply.image}
                                 className="w-100 mt-2"
                             />

@@ -4,6 +4,7 @@ import { axiosInstance } from "@/utils/axios";
 import type { RootState } from "@/store";
 import { setProfile } from "@/store/profileSlice";
 import { toast } from "sonner";
+import { baseUrl } from "@/utils/apiProd";
 
 const UpdateProfileForm = () => {
     const dispatch = useDispatch();
@@ -23,7 +24,7 @@ const UpdateProfileForm = () => {
             setUsername(profile.username || "");
             setBio(profile.bio || "");
             if (profile.photoProfile) {
-                setPreviewUrl(`http://localhost:3000/uploads/${profile.photoProfile}`);
+                setPreviewUrl(`${baseUrl}/uploads/${profile.photoProfile}`);
             }
         }
         

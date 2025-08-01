@@ -99,7 +99,7 @@ const RepliesCard = () => {
             <div>
                 <p>{thread?.content}</p>
                 {thread?.image && (
-                    <img src={`http://localhost:3000/uploads/${thread?.image}`} className="rounded mt-2 w-full" />
+                    <img src={`${baseUrl}/uploads/${thread?.image}`} className="rounded mt-2 w-full" />
                 )}
             </div>
             <div>
