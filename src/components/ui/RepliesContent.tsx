@@ -8,6 +8,7 @@ import { formatTimeAndDate } from "@/utils/dayjs"
 import { useDispatch, useSelector } from "react-redux"
 import type { RootState } from "@/store"
 import { toggleLike, updateLikeFromBackend } from "@/store/likeSlice"
+import { baseUrl } from "@/utils/apiProd"
 
 const RepliesCard = () => {
     const { threadId } = useParams()
@@ -86,7 +87,7 @@ const RepliesCard = () => {
             <div className="flex gap-4">
                 <img src={
                         thread?.createdByUser.photo_profile
-                        ? `http://localhost:3000/uploads/${thread.createdByUser.photo_profile}`
+                        ? `${baseUrl}/uploads/${thread.createdByUser.photo_profile}`
                         : "default.jpg"
                     } alt="" className="w-10 h-10 rounded-full" 
                 />

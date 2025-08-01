@@ -4,6 +4,7 @@ import type { Follower } from "@/types/profile";
 import { mapToProfile } from "@/types/profile";
 import { useDispatch } from "react-redux";
 import { setProfile } from "@/store/profileSlice";
+import { baseUrl } from "@/utils/apiProd";
 
 
 const FollowingList = () => {
@@ -60,7 +61,7 @@ const FollowingList = () => {
                     <img
                         src={
                         following.photo_profile
-                            ? `http://localhost:3000/uploads/${following.photo_profile}`
+                            ? `${baseUrl}/uploads/${following.photo_profile}`
                             : "default.jpg"
                         }
                         alt={following.username}

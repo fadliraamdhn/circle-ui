@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "@/store";
 import { setProfile } from "@/store/profileSlice";
 import { mapToProfile } from "@/types/profile"; // pastikan import ini sesuai path kamu
+import { baseUrl } from "@/utils/apiProd";
 
 type User = {
     id: number;
@@ -95,7 +96,7 @@ const SearchUsersWithFollow = () => {
                     <img
                     src={
                         user.photo_profile
-                        ? `http://localhost:3000/uploads/${user.photo_profile}`
+                        ? `${baseUrl}/uploads/${user.photo_profile}`
                         : "default.jpg"
                     }
                     alt={user.username}
