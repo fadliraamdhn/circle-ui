@@ -88,7 +88,7 @@ const RepliesCard = () => {
                 <img src={
                         thread?.createdByUser.photo_profile
                         ? `${baseUrl}/uploads/${thread.createdByUser.photo_profile}`
-                        : "default.jpg"
+                        : "/default.jpg"
                     } alt="" className="w-10 h-10 rounded-full" 
                 />
                 <div>

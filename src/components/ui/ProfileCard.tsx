@@ -37,7 +37,7 @@ const ProfileCard = () => {
             <div className="p-4 relative">
                 <div className="absolute -top-10 left-4">
                 <img
-                    src= {profile?.photoProfile? `${baseUrl}/uploads/${profile?.photoProfile}` : "default.jpg" } 
+                    src= {profile?.photoProfile? `${baseUrl}/uploads/${profile?.photoProfile}` : "/default.jpg" } 
                     alt="profile"
                     className="w-20 h-20 rounded-full border-4 border-zinc-900"
                 />
