@@ -1,70 +1,75 @@
 import type { ReactNode } from "react"
-import { Home, UserSearch, Heart, User, LogOut } from "lucide-react"
+import "./homelayout.css"
 import ProfileCard from "../ui/ProfileCard"
 import SuggestedUsers from "../ui/SuggestedUser"
-import "./homelayout.css"
-import { axiosInstance } from "@/utils/axios"
+import MobileNav from "../MobileNav"
 import { Link } from "react-router-dom"
+import { Home, UserSearch, Heart, User, LogOut} from "lucide-react"
+import { CreateButtonModal } from "../CreateButton"
+import { axiosInstance } from "@/utils/axios"
 
-const HomeLayout = ({ children }: { children: ReactNode}) => {
 
-    const handleLogout = async () => {
-        await axiosInstance.post("/api/v1/auth/logout");
-        localStorage.removeItem('isLoggedIn');
-        window.location.href = '/login';
-    };
+const HomeLayout = ({ children }: { children: ReactNode }) => {
+    const handleLogout = async () => { 
+        await axiosInstance.post("/api/v1/auth/logout"); 
+        localStorage.removeItem('isLoggedIn'); 
+        window.location.href = '/login'; 
+    }
 
     return (
         <div className="flex min-h-screen max-w-[1600px] mx-auto">
-            {/* Sidebar kiri */}
-            <aside className="w-70 sticky top-0 h-screen border-r border-gray-600 py-6 px-5 flex flex-col justify-between">
+            <aside className="w-70 sticky top-0 h-screen border-r border-gray-600 px-5 py-6 hidden lg:flex flex-col justify-between">
                 <div>
                     <div className="text-green-500 font-bold text-5xl mb-8">
                         Circle
                     </div>
                     <nav className="flex flex-col gap-3 mt-4 font-medium">
-                        <Link to="/">
-                            <div className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer">
-                                <Home/>
+                            <Link to="/">
+                                <div className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer">
+                                <Home />
                                 Home
-                            </div>
-                        </Link>
-                        <Link to="/search">
-                            <div className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer">
-                                <UserSearch/>
+                                </div>
+                            </Link>
+                            <Link to="/search">
+                                <div className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer">
+                                <UserSearch />
                                 Search
-                            </div>
-                        </Link>
-                        <Link to="/follow">
-                            <div className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer">
-                                <Heart/>
+                                </div>
+                            </Link>
+                            <Link to="/follow">
+                                <div className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer">
+                                <Heart />
                                 Follow
-                            </div>
-                        </Link>
-                        <Link to="/me">
-                            <div className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer">
-                                <User/>
+                                </div>
+                            </Link>
+                            <Link to="/me">
+                                <div className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer">
+                                <User />
                                 Profile
-                            </div>
-                        </Link>
-                        <button className="bg-green-600 cursor-pointer rounded-full px-6 py-2 font-medium">Create Post</button>
-                    </nav>
-                </div>
-                <div className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer">
-                    <LogOut className="rotate-180"/>
-                    <p className="font-medium" onClick={() => handleLogout()}>Logout</p>
+                                </div>
+                            </Link>
+                            <CreateButtonModal />
+                        </nav>
+                    </div>
+                <div
+                    className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer mt-6"
+                    onClick={() => handleLogout()}
+                >
+                    <LogOut className="rotate-180" />
+                    <p className="font-medium">Logout</p>
                 </div>
             </aside>
 
-            {/* Konten utama */}
-            <main className="flex-1 py-8">
+            <MobileNav />
+
+            <main className="flex-1 py-8 px-4 mt-14 lg:mt-0">
                 {children}
             </main>
 
-            <aside className="w-100 sticky top-0 h-screen px-4 pt-10 hidden md:block">
+            <aside className="w-100 sticky top-0 h-screen px-4 pt-10 hidden lg:block">
                 <h2 className="font-semibold mb-4">My Profile</h2>
-                <ProfileCard/>
-                <SuggestedUsers/>
+                <ProfileCard />
+                <SuggestedUsers />
             </aside>
         </div>
     )

@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { io } from "socket.io-client";
 
-export const socket = io("wss://circle-api-production.up.railway.app", {
+export const socket = io("ws://localhost:3000", {
     transports: ["websocket"],
     withCredentials: true,
 });
 
-// Hook universal: bisa untuk new-thread, new-reply, dsb
+
 export function useSocket(event: string, callback: (data: any) => void) {
     useEffect(() => {
         if (!event || !callback) return;
@@ -19,12 +19,12 @@ export function useSocket(event: string, callback: (data: any) => void) {
             console.error("WebSocket Connection Error:", err.message);
         });
 
-        socket.on(event, callback); // ← Pakai event dinamis
+        socket.on(event, callback);
 
         return () => {
             socket.off("connect");
             socket.off("connect_error");
-            socket.off(event, callback); // ← Pastikan callback di-unsub juga
+            socket.off(event, callback);
         };
     }, [event, callback]);
 }

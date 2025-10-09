@@ -23,9 +23,9 @@ const LoginPage = () => {
             const userData = res.data.data
             localStorage.setItem('isLoggedIn', 'true');
             setForm({ identity: "", password: ""});
-            toast.success(`Selamat datang kembali, ${userData.username}!`)
+            toast.success(`Welcome Back, ${userData.username}!`)
             setTimeout(() => {
-                navigate("/");  // Sesuaikan path jika berbeda
+                navigate("/");
             }, 1500);
         } catch (error: any) {
             const errorMessage = error?.response?.data?.message || "Login gagal." 

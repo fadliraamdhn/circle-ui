@@ -31,7 +31,7 @@ const ProfileCard = () => {
     }, [dispatch, profile])
 
     return (
-        <div className="bg-zinc-900 rounded-xl overflow-hidden text-white max-w-md mx-auto">
+        <div className="bg-zinc-900 rounded-xl overflow-hidden text-white lg:w-full mx-auto">
             <div className="bg-gradient-to-r from-green-300 via-yellow-300 to-green-400 h-24 w-full" />
 
             <div className="p-4 relative">

@@ -23,7 +23,7 @@ export const RegisterPage = () => {
         setLoading(true)
 
         try {
-            const res = await axiosInstance.post("api/v1/auth/register", form)
+            const res = await axiosInstance.post("/api/v1/auth/register", form)
             const message = res.data.message
 
             setForm({ username: "", fullName: "", email: "", password: "" });
