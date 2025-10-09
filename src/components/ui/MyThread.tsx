@@ -1,6 +1,5 @@
 import { useProfile } from "@/hooks/useProfile"
 import type { ThreadCardProps } from "@/types/thread"
-import { baseUrl } from "@/utils/apiProd"
 import { axiosInstance } from "@/utils/axios"
 import { useEffect, useState } from "react"
 
