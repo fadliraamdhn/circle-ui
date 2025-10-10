@@ -19,12 +19,12 @@ const HomeLayout = ({ children }: { children: ReactNode }) => {
 
     return (
         <div className="flex min-h-screen max-w-[1600px] mx-auto">
-            <aside className="w-70 bg-black sticky top-0 h-screen border-r border-gray-600 px-5 py-6 hidden lg:flex flex-col justify-between">
+            <aside className="w-70 sticky top-0 h-screen border-r border-gray-600 px-5 py-6 hidden lg:flex flex-col justify-between">
                 <div>
                     <div className="text-green-500 font-bold text-5xl mb-8">
                         Circle
                     </div>
-                    <nav className="flex flex-col gap-3 mt-4 font-medium">
+                    <nav className="flex flex-col gap-3 mt-4 font-medium ">
                             <Link to="/home">
                                 <div className="flex gap-4 p-2 hover:bg-gray-600 rounded cursor-pointer">
                                 <Home />

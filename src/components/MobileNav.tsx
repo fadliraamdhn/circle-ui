@@ -10,7 +10,7 @@ const MobileNav = () => {
     };
 
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-700 lg:hidden">
+        <header className="fixed top-0 left-0 right-0 z-50 border-b border-zinc-700 bg-black lg:hidden">
             <nav className="flex justify-between items-center px-4 py-3">
                 <div className="text-green-500 font-bold text-xl">Circle</div>
                     <div className="flex items-center gap-5">
