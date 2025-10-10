@@ -12,6 +12,7 @@ import UpdateProfilePage from "./pages/UpdateProfilePage"
 import FollowPage from "./pages/FollowPage"
 import { AuthProvider } from "./context/auth"
 import PrivateRoute from "./utils/privateRoute"
+import LandingPage from "./pages/LandingPage"
 
 function App() {
 
@@ -23,8 +24,9 @@ function App() {
         <Routes>
           <Route path="/register" element={<RegisterPage/>}/>
           <Route path="/login" element={<LoginPage/>}/>
+          <Route path="/" element={<LandingPage />} />
           <Route element={<PrivateRoute/>}>
-            <Route path="/" element={<HomePage/>}/>
+            <Route path="/home" element={<HomePage/>}/>
             <Route path="/thread/:threadId" element={<ThreadPage/>}/>
             <Route path="/profile" element={<UpdateProfilePage/>}/>
             <Route path="/search" element={<SearchPage/>}/>

@@ -3,17 +3,18 @@ import "./homelayout.css"
 import ProfileCard from "../ui/ProfileCard"
 import SuggestedUsers from "../ui/SuggestedUser"
 import MobileNav from "../MobileNav"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Home, UserSearch, Heart, User, LogOut} from "lucide-react"
 import { CreateButtonModal } from "../CreateButton"
 import { axiosInstance } from "@/utils/axios"
 
 
 const HomeLayout = ({ children }: { children: ReactNode }) => {
+    const navigate = useNavigate()
     const handleLogout = async () => { 
         await axiosInstance.post("/api/v1/auth/logout"); 
         localStorage.removeItem('isLoggedIn'); 
-        window.location.href = '/login'; 
+        navigate("/")
     }
 
     return (
