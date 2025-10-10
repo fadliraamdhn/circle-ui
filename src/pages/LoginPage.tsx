@@ -25,7 +25,7 @@ const LoginPage = () => {
             setForm({ identity: "", password: ""});
             toast.success(`Welcome Back, ${userData.username}!`)
             setTimeout(() => {
-                navigate("/");
+                navigate("/home");
             }, 1500);
         } catch (error: any) {
             const errorMessage = error?.response?.data?.message || "Login gagal." 
