@@ -80,7 +80,7 @@ const ThreadCard: React.FC<ThreadCardProps> = ({ id, photoProfile, fullname, use
     return (
         <div key={id} className="flex gap-4 mt-6 py-2 px-6">
             <div>
-                <img src={photoProfile ? `${baseUrl}/uploads/${photoProfile}` : "/default.jpg"} className="w-10 h-10 rounded-full" alt={`${fullname} avatar`} />
+                <img src={photoProfile ? `${baseUrl}/uploads/${photoProfile}` : "/default.jpg"} className="w-10 h-10 rounded-full object-cover" alt={`${fullname} avatar`} />
             </div>
             <div>
                 <div className="flex gap-2">

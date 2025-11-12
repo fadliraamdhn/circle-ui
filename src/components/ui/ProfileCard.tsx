@@ -39,7 +39,7 @@ const ProfileCard = () => {
                 <img
                     src= {profile?.photoProfile? `${baseUrl}/uploads/${profile?.photoProfile}` : "/default.jpg" } 
                     alt="profile"
-                    className="w-20 h-20 rounded-full border-4 border-zinc-900"
+                    className="w-20 h-20 rounded-full border-4 border-zinc-900 object-cover"
                 />
                 </div>
 
