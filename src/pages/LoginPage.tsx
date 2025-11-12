@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { axiosInstance } from "@/utils/axios"
 import { toast } from "sonner"
+import { setItemWithExpiry } from "@/utils/localStorageWithExpiry"
 
 const LoginPage = () => {
     const navigate = useNavigate();
@@ -20,7 +21,7 @@ const LoginPage = () => {
         try {
             const res = await axiosInstance.post("api/v1/auth/login", form)
             const userData = res.data.data
-            localStorage.setItem('isLoggedIn', 'true');
+            setItemWithExpiry("isLoggedIn", true, 6);
             setForm({ identity: "", password: ""});
             toast.success(`Welcome Back, ${userData.username}!`)
             setTimeout(() => {

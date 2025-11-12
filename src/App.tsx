@@ -13,9 +13,10 @@ import FollowPage from "./pages/FollowPage"
 import { AuthProvider } from "./context/auth"
 import PrivateRoute from "./utils/privateRoute"
 import LandingPage from "./pages/LandingPage"
+import { getItemWithExpiry } from "./utils/localStorageWithExpiry"
 
 function PublicRoute() {
-    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const isLoggedIn = getItemWithExpiry("isLoggedIn") === true;
     return isLoggedIn ? <Navigate to="/home" /> : <Outlet />;
 }
 

@@ -9,10 +9,10 @@ const HomePage = () => {
     return (
         <HomeLayout>
             <h1 className="text-2xl font-medium px-6">Home</h1>
-            <div className="flex gap-2 items-center mt-6 px-6">
+            <div className="flex gap-2 items-center mt-3 px-3">
                 <img 
                     src= {profile?.photoProfile? `${baseUrl}/uploads/${profile?.photoProfile}` : "default.jpg" }
-                    className="rounded-full border w-11 h-11"
+                    className="rounded-full border w-11 h-11 object-cover"
                 />
                 <CreateThreadModal />
             </div>

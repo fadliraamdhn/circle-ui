@@ -65,6 +65,7 @@ const ThreadList = () => {
             if (exists) return prev;
             return [thread, ...prev];
         });
+        console.log(threads);
     };
 
     useSocket("new-thread", handleNewThread);
@@ -92,7 +93,7 @@ const ThreadList = () => {
 
 
             {!hasMore && !loading && (
-                <p className="text-center text-gray-500 my-4">Tidak ada data lagi.</p>
+                <p className="text-center text-gray-500 my-4">No more posting!</p>
             )}
         </>
     )

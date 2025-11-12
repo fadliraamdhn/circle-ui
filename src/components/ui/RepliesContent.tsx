@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { Heart, MessageSquareText } from "lucide-react"
 import type { Thread } from "@/types/thread"
 import { axiosInstance } from "@/utils/axios"
@@ -89,7 +89,7 @@ const RepliesCard = () => {
                         thread?.createdByUser.photo_profile
                         ? `${baseUrl}/uploads/${thread.createdByUser.photo_profile}`
                         : "/default.jpg"
-                    } alt="" className="w-10 h-10 rounded-full" 
+                    } alt="" className="w-10 h-10 rounded-full object-cover" 
                 />
                 <div>
                     <p className="font-medium">{thread?.createdByUser.full_name}</p>
@@ -117,10 +117,10 @@ const RepliesCard = () => {
                     />
                     <p>{likesCount}</p>
                 </div>
-                <Link to={"/"} className="cursor-pointer hover:text-green-700 transition flex gap-2">
+                <div className="hover:text-green-700 transition flex gap-2">
                     <MessageSquareText />
                     <p>{thread?.number_of_replies}</p>
-                </Link>
+                </div>
             </div>
         </div>
     )

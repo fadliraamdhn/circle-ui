@@ -54,11 +54,11 @@ export function CreateThreadModal() {
 
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Buat Thread Baru</DialogTitle>
+                    <DialogTitle>Create new thread</DialogTitle>
                 </DialogHeader>
 
                 <Textarea
-                    placeholder="Apa yang sedang terjadi?"
+                    placeholder="What is hapening?"
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
                     className="min-h-[100px]"
@@ -68,7 +68,7 @@ export function CreateThreadModal() {
                     <img
                         src={URL.createObjectURL(image)}
                         alt="Preview"
-                        className="h-50 rounded-lg"
+                        className="h-50 rounded-lg object-cover"
                     />
                 )}
 
