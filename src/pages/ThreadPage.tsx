@@ -12,7 +12,7 @@ const ThreadPage = () => {
     return (
         <HomeLayout>
             <div>
-                <Link to={`/`} className="cursor-pointer hover:text-green-700 transition flex items-center px-6 gap-4">
+                <Link to={`/home`} className="cursor-pointer hover:text-green-700 transition flex items-center px-6 gap-4">
                     <MoveLeft/>
                     <h1 className="text-2xl font-medium">Status</h1>
                 </Link>

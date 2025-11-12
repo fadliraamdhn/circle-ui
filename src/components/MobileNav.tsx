@@ -14,7 +14,7 @@ const MobileNav = () => {
             <nav className="flex justify-between items-center px-4 py-3">
                 <div className="text-green-500 font-bold text-xl">Circle</div>
                     <div className="flex items-center gap-5">
-                    <Link to="/">
+                    <Link to="/home">
                         <Home className="w-6 h-6" />
                     </Link>
                     <Link to="/search">

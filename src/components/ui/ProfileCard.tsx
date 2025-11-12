@@ -45,7 +45,7 @@ const ProfileCard = () => {
 
                 <div className="text-right">
                 <Link to="/profile">
-                    <button className="border border-gray-500 rounded-full px-4 py-1 text-sm hover:bg-white hover:text-black transition">
+                    <button className="cursor-pointer border border-gray-500 rounded-full px-4 py-1 text-sm hover:bg-white hover:text-black transition">
                         Edit Profile
                     </button>
                 </Link>

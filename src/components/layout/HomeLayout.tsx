@@ -67,8 +67,7 @@ const HomeLayout = ({ children }: { children: ReactNode }) => {
                 {children}
             </main>
 
-            <aside className="w-100 sticky top-0 h-screen px-4 pt-10 hidden lg:block">
-                <h2 className="font-semibold mb-4">My Profile</h2>
+            <aside className="w-100 sticky top-0 h-screen px-4 pt-10 hidden lg:block border-l border-gray-600">
                 <ProfileCard />
                 <SuggestedUsers />
             </aside>

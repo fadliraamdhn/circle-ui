@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 export default function LandingPage() {
     const navigate = useNavigate();
     return (
-        <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white flex flex-col items-center justify-center">
+        <div className="min-h-screen px-6 text-center bg-gradient-to-b from-gray-900 to-black text-white flex flex-col items-center justify-center">
             <h1 className="text-6xl font-bold mb-4">Welcome to Circle</h1>
             <p className="text-lg opacity-80 mb-8 text-center max-w-md">
                 Connect, collaborate, and create — a space for developers to share ideas

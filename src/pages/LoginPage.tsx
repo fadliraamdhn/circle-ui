@@ -17,7 +17,6 @@ const LoginPage = () => {
         e.preventDefault()
         setLoading(true)
         
-
         try {
             const res = await axiosInstance.post("api/v1/auth/login", form)
             const userData = res.data.data
@@ -36,7 +35,7 @@ const LoginPage = () => {
     }
 
     return (
-        <main className="min-h-screen flex items-center justify-center flex-col">
+        <main className="min-h-screen flex items-center justify-center flex-col px-6">
             <div className="w-full max-w-md">
                 <h1 className="text-green-500 font-bold text-5xl">circle</h1>
                 <h2 className="font-semibold text-2xl mt-3">Login to Circle</h2>

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom"
+import { Navigate, Outlet, Route, Routes } from "react-router-dom"
 import RegisterPage from "./pages/RegisterPage"
 import LoginPage from "./pages/LoginPage"
 import HomePage from "./pages/HomePage"
@@ -14,6 +14,11 @@ import { AuthProvider } from "./context/auth"
 import PrivateRoute from "./utils/privateRoute"
 import LandingPage from "./pages/LandingPage"
 
+function PublicRoute() {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    return isLoggedIn ? <Navigate to="/home" /> : <Outlet />;
+}
+
 function App() {
 
   return (
@@ -22,8 +27,10 @@ function App() {
       <Provider store={store}>
       <AuthProvider>
         <Routes>
-          <Route path="/register" element={<RegisterPage/>}/>
-          <Route path="/login" element={<LoginPage/>}/>
+          <Route element={<PublicRoute />}>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+          </Route>
           <Route path="/" element={<LandingPage />} />
           <Route element={<PrivateRoute/>}>
             <Route path="/home" element={<HomePage/>}/>

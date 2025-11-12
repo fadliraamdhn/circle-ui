@@ -38,7 +38,7 @@ export const RegisterPage = () => {
 
     return (
         <main className="min-h-screen flex items-center justify-center flex-col">
-            <div className="w-full max-w-md">
+            <div className="w-full max-w-md px-6">
                 <h1 className="text-green-500 font-bold text-5xl">circle</h1>
                 <h2 className="font-semibold text-2xl mt-3">Create Account Circle</h2>
                 <div>
