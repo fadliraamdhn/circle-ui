@@ -1,69 +1,52 @@
-# React + TypeScript + Vite
+🌐 Circle — Social Media App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A lightweight, fast, and modern social media web application built with React + TypeScript + Vite, featuring real-time updates, infinite scroll, likes, replies, and user authentication.
 
-Currently, two official plugins are available:
+🚀 Features
+💬 Core Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🔥 Real-time Threads — update otomatis via WebSocket
 
-## Expanding the ESLint configuration
+📜 Infinite Scroll untuk feed
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+❤️ Like system (optimistic UI + sync backend)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+💭 Replies & Thread Detail Page
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+📷 Upload Foto Profil & Gambar Post
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+👤 User Authentication (Register, Login, JWT)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+📊 Responsive UI mirip Twitter / Threads
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+🛠 Tech Stack
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Frontend: React, TypeScript, Vite
+
+State Management: Redux Toolkit
+
+Real-Time: WebSocket (socket.io client)
+
+Backend API: Express + Prisma (optional)
+
+Styling: TailwindCSS
+
+Icons: Lucide React
+
+⚙️ Installation
+1. Clone repository
+git clone https://github.com/username/circle-app.git
+cd circle-app
+
+2. Install dependencies
+npm install
+
+3. Setup environment
+
+Buat file .env:
+
+VITE_API_URL=http://localhost:3000
+VITE_WS_URL=http://localhost:3000
+
+4. Run development server
+npm run dev
